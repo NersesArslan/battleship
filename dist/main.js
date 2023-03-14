@@ -1,1 +1,1 @@
-(()=>{"use strict";const t=(t=>{let e=0;return{length:3,hit:()=>{e++},isSunk:()=>3===e,hits:e}})();console.log(t.length)})();
+(()=>{"use strict";const e=(()=>{let e=[];return{generateBoard:(t,o)=>{for(let r=0;r<t;r++){e[r]=[r];for(let t=0;t<o;t++)e[r][t]=t}return e},test:()=>{console.log("this is just a test")}}})();console.log(e.generateBoard(10,10))})();
