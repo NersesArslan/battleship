@@ -1,0 +1,29 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+ "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack  --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NersesArslan/battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NersesArslan/battleship/issues"
+  },
+  "homepage": "https://github.com/NersesArslan/battleship#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1"
+  }
+}
