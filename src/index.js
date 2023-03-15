@@ -8,56 +8,49 @@ import {
   destroyer,
 } from "./ship.js";
 
-const Gameboard = () => {
-  //creates a 2d array of 10 x 10 dimensions when called
-  let board = [];
+//creates a 2d array of 10 x 10 dimensions when called
+let board = [];
 
-  const generateBoard = () => {
-    for (let i = 0; i < 10; i++) {
-      board[i] = [];
-      for (let j = 0; j < 10; j++) {
-        board[i][j] = 0;
-      }
+const generateBoard = () => {
+  for (let i = 0; i < 10; i++) {
+    board[i] = [];
+    for (let j = 0; j < 10; j++) {
+      board[i][j] = 0;
     }
-    return board;
-  };
-
-  const gameBoard = generateBoard();
-
-  const placeShip = (shipLength, coordinate) => {
-    // suppose you want to place a destroyer in [5, 5] how would you do this?
-    let x = coordinate[0];
-    let y = coordinate[1];
-
-    // checks whether  entered coordinates are within board's boundary
-    if (x < 0 || x > 9 || y < 0 || y > 9) {
-      return "Please enter valid coordinates";
-    }
-
-    // places the hsip horizontally from starting coordinate towards the right most end of the ship
-
-    // write a function that checks the availability of the coordinates
-    // start by checking if the present coordinate is available;
-// returns all horzintal coordinates of a ship 
-    for(let i = 0; i < shipLength; i++) {
-      coords[i] = [x, y + i]
   }
-return coords
-}
-
-
-    for (let i = 0; i < shipLength; i++) {
-      if (gameBoard[x][y] === 1) {
-        return "this coordinate is taken";
-      } else gameBoard[x][y + i] = 1;
-    }
-    return gameBoard;
-  };
-
-  return { generateBoard, placeShip, gameBoard };
+  return board;
 };
 
-const game = Gameboard();
+const gameBoard = generateBoard();
+
+const placeShip = (shipLength, coordinate) => {
+  //separate coordinate array into x and y
+  let x = coordinate[0];
+  let y = coordinate[1];
+  let coords = [];
+  // checks whether  entered coordinates are within board's boundary
+  if (x < 0 || x > 9 || y < 0 || y > 9) {
+    return "Please enter valid coordinates";
+  }
+
+  // returns all horizontal coordinates of a ship
+  for (let i = 0; i < shipLength; i++) {
+    coords[i] = [x, y + i];
+    // checks if ship can fit on horizontal axis
+    if (coords[i][1] > 9) {
+      return "This ship can't fit, please enter another coordinate";
+    }
+    // check to see if horizontal axis is already marked
+    else if (gameBoard[x][y + i] === 1) {
+      return "There's already another ship marked here, please choose another coordinate";
+    }
+  }
+  //generated the board with newly placed ship
+  for (let i = 0; i < shipLength; i++) {
+    gameBoard[x][y + i] = 1;
+  }
+  return gameBoard;
+};
 
 console.log(game.placeShip(2, [1, 1]));
 // Gameboards should be able to place ships at specific coordinates
