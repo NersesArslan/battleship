@@ -1,31 +1,47 @@
-import ship from "./ship.js";
+import { gt } from "lodash";
+import {
+  ship,
+  carrier,
+  cruiser,
+  battleship,
+  submarine,
+  destroyer,
+} from "./ship.js";
 
 const Gameboard = () => {
-  //figure out how to create a board
+  //creates a 2d array of 10 x 10 dimensions when called
   let board = [];
 
-  const generateBoard = (rows, cols) => {
-    for (let i = 0; i < rows; i++) {
+  const generateBoard = () => {
+    for (let i = 0; i < 10; i++) {
       board[i] = [i];
-      for (let j = 0; j < cols; j++) {
+      for (let j = 0; j < 10; j++) {
         board[i][j] = j;
       }
     }
     return board;
   };
 
-  //place ships in specific coordinates in the board
-  const test = () => {
-    console.log("this is just a test");
+  // creates a ship of a specific length  when called
+  const generateShip = (length) => {
+    return ship(length);
   };
 
-  const generateShip = () => {
-    return ship();
-  };
+  const placeShip = (shipType, coordinates) => {
+    const shipLength = shipType.length;
 
-  return { generateBoard, test };
+    const placeFunction = (shipLength, coordinates) => {
+      //code that iterates through gameBoard and returns a `shipLength` number of consecutive coordinates
+      // starting from `coordinates`
+      return coord;
+    };
+  };
+  return { generateBoard, generateShip, placeShip };
 };
 
 const game = Gameboard();
 
-console.log(game.generateBoard(10, 10));
+console.log(game.placeShip(cruiser));
+
+// Gameboards should be able to place ships at specific coordinates
+// by calling the ship factory function.
