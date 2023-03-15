@@ -28,16 +28,28 @@ const Gameboard = () => {
     // suppose you want to place a destroyer in [5, 5] how would you do this?
     let x = coordinate[0];
     let y = coordinate[1];
+
+    // checks whether  entered coordinates are within board's boundary
+    if (x < 0 || x > 9 || y < 0 || y > 9) {
+      return "Please enter valid coordinates";
+    }
+
     // places the hsip horizontally from starting coordinate towards the right most end of the ship
 
     // write a function that checks the availability of the coordinates
     // start by checking if the present coordinate is available;
+// returns all horzintal coordinates of a ship 
+    for(let i = 0; i < shipLength; i++) {
+      coords[i] = [x, y + i]
+  }
+return coords
+}
+
 
     for (let i = 0; i < shipLength; i++) {
       if (gameBoard[x][y] === 1) {
         return "this coordinate is taken";
-      }
-      gameBoard[x][y + i] = 1;
+      } else gameBoard[x][y + i] = 1;
     }
     return gameBoard;
   };
