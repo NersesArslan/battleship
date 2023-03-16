@@ -10,7 +10,7 @@ import {
 
 //creates a 2d array of 10 x 10 dimensions
 
-const placeShip = (shipLength, coordinate) => {
+const placeShip = (shipLength, coordinate, horizontal) => {
   let x = coordinate[0];
   let y = coordinate[1];
   let coords = [];
@@ -20,39 +20,44 @@ const placeShip = (shipLength, coordinate) => {
     return "Please enter valid coordinates";
   }
 
-  //  HORIZONTAL
+  if (horizontal) {
+    // returns all horizontal coordinates of a ship
+    for (let i = 0; i < shipLength; i++) {
+      coords[i] = [x, y + i];
 
-  // returns all horizontal coordinates of a ship
-  for (let i = 0; i < shipLength; i++) {
-    coords[i] = [x + i, y]; //Vertical
+      // checks if ship can fit on horizontal axis
+      if (coords[i][1] > 9) {
+        return "This ship can't fit, please enter another coordinate";
+      }
+      // check to see if horizontal axis is already marked
+      else if (gameBoard[x][y + i] === 1) {
+        return "There's already another ship marked here, please choose another coordinate";
+      }
+    }
+    //generated the board with newly placed ship
+    for (let i = 0; i < shipLength; i++) {
+      gameBoard[x][y + i] = 1;
+    }
+  } else {
+    //code for vertical placement of ships
+    for (let i = 0; i < shipLength; i++) {
+      coords[i] = [x - i, y];
+      if (coords[i][0] < 0) {
+        return "this ship can't fit. Please choose another coordinate";
+      }
 
-    // if (coords[1][i] > 9) {
-    //   //Vertical
-    //   return "This ship can't fit, please enter another coordinate";
-    // }
-
-    // //     // check to see if horizontal axis is already marked
-    // else if (gameBoard[x][y + i] === 1) {
-    //   return "There's already another ship marked here, please choose another coordinate";
-    // }
-    // // VERTICAL
-    // else if (gameBoard[x + i][y] === 1) {
-    //   return "There's already another ship marked here, please choose another coordinate";
-    // }
+      if (gameBoard[x - i][y] === 1) {
+        return "There's another ship marked in these coordinates. Please choos another coordinate.";
+      }
+    }
+    for (let i = 0; i < shipLength; i++) {
+      gameBoard[x - i][y] = 1;
+    }
   }
 
-  // //   //generated the board with newly placed ship
-  // for (let i = 0; i < shipLength; i++) {
-  //   gameBoard[x][y + i] = 1;
-  // }
-
-  // // VERTICAL
-  // for (let i = 0; i < shipLength; i++) {
-  //   gameBoard[x + i][y] = 1;
-  // }
-
-  // return gameBoard;
-  return coords;
+  return gameBoard;
 };
 
-console.log(placeShip(4, [4, 4]));
+placeShip(4, [3, 2], true);
+
+console.log(gameBoard);
