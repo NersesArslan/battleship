@@ -1,6 +1,7 @@
 const bored = () => {
   // generates 10 x 10 gameboard as a 2D array
   let board = [];
+  let shipData = [];
 
   const generateBoard = () => {
     for (let i = 0; i < 10; i++) {
@@ -45,6 +46,7 @@ const bored = () => {
         // pushes each placed ships coordinates to the ship object
         ship.coordinates.push((coords[i] = [x, y + i]));
       }
+      shipData.push(ship);
     } else {
       //code for vertical placement of ships
       for (let i = 0; i < shipLength; i++) {
@@ -59,14 +61,15 @@ const bored = () => {
       }
       for (let i = 0; i < shipLength; i++) {
         gameBoard[x - i][y] = 1;
-        ship.coordinates.push((coords[i] = [x - 1, y]));
+        ship.coordinates.push((coords[i] = [x - i, y]));
       }
+      shipData.push(ship);
     }
 
     return gameBoard;
   };
 
-  return { placeShip, generateBoard, gameBoard };
+  return { placeShip, generateBoard, gameBoard, shipData };
 };
 
 export default bored;
