@@ -26,6 +26,7 @@ const bored = () => {
 
     if (axis) {
       // returns all horizontal coordinates of a ship
+      // need to figure out how to keep track of this for each ship placed on the gameboard
       for (let i = 0; i < shipLength; i++) {
         coords[i] = [x, y + i];
 
@@ -41,6 +42,7 @@ const bored = () => {
       //generated the board with newly placed ship
       for (let i = 0; i < shipLength; i++) {
         gameBoard[x][y + i] = 1;
+        ship.coordinates.push((coords[i] = [x, y + i]));
       }
     } else {
       //code for vertical placement of ships
@@ -56,6 +58,7 @@ const bored = () => {
       }
       for (let i = 0; i < shipLength; i++) {
         gameBoard[x - i][y] = 1;
+        ship.coordinates.push((coords[i] = [x - 1, y]));
       }
     }
 
