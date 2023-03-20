@@ -42,6 +42,7 @@ const bored = () => {
       //generated the board with newly placed ship
       for (let i = 0; i < shipLength; i++) {
         gameBoard[x][y + i] = 1;
+        // pushes each placed ships coordinates to the ship object
         ship.coordinates.push((coords[i] = [x, y + i]));
       }
     } else {

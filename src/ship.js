@@ -1,10 +1,11 @@
 const ship = (length) => {
+  let coordinates = [];
   let hits = 0;
   const hit = () => {
     hits++;
   };
   const isSunk = () => (hits === length ? true : false);
-  return { length, hit, isSunk, hits };
+  return { length, coordinates, hit, isSunk, hits };
 };
 
 const carrier = ship(5);
