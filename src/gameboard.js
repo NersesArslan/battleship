@@ -1,3 +1,5 @@
+import { ship } from "./ship";
+
 const bored = () => {
   // generates 10 x 10 gameboard as a 2D array
   let board = [];
@@ -70,7 +72,30 @@ const bored = () => {
     return gameBoard;
   };
 
-  return { placeShip, generateBoard, gameBoard, shipData };
+  const receiveAttack = (hit) => {
+    let x = hit[0];
+    let y = hit[1];
+    if (gameBoard[x][y] === 1) {
+      //send hit to the corresponding ship
+
+      const ship = shipData.find((item) =>
+        item.coordinates.find((coords) => coords[0] === x && coords[1] === y)
+      );
+      ship.hit();
+      return `${ship.name} got hit!`;
+    } else if (gameBoard[x][y] === 0) {
+      return "better luck next time!";
+      //record coordinates of missed shot
+    }
+  };
+
+  return {
+    placeShip,
+    generateBoard,
+    receiveAttack,
+    gameBoard,
+    shipData,
+  };
 };
 
 export default bored;

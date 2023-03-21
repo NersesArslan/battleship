@@ -18,7 +18,7 @@ gameboard.placeShip(cruiser, [0, 0], true);
 gameboard.placeShip(submarine, [9, 0], false);
 gameboard.placeShip(destroyer, [0, 8], true);
 
-console.log(gameboard.shipData.forEach((item) => console.log(item)));
+console.log(gameboard.receiveAttack([0, 8]));
 
 // console.log(gameboard.shipData.map((element) => console.log(element.name)));
 // console.log(gameboard.shipData.map((element) => console.log(element.isSunk())));
