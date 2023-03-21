@@ -1,9 +1,14 @@
 import { ship } from "./ship";
 
 const bored = () => {
+  // array where all ship data (name, coordinates, sinkStatus) is stored
+  let shipData = [];
+  // array where all missed shots are stored.
+  //"You miss 100% of the shots you don't take"
+  // --Wayne Gretzky
+  let missedShots = [];
   // generates 10 x 10 gameboard as a 2D array
   let board = [];
-  let shipData = [];
 
   const generateBoard = () => {
     for (let i = 0; i < 10; i++) {
@@ -17,6 +22,7 @@ const bored = () => {
 
   const gameBoard = generateBoard();
 
+  //places a ship to the game board.
   const placeShip = (ship, coordinate, axis) => {
     let x = coordinate[0];
     let y = coordinate[1];
@@ -72,29 +78,58 @@ const bored = () => {
     return gameBoard;
   };
 
+  //determines whether an attack hits or misses a target & records each hit.
   const receiveAttack = (hit) => {
     let x = hit[0];
     let y = hit[1];
+    //checks if coordinate has already been entered before
+    if (gameBoard[x][y] === "x") {
+      return "This coordinate is already hit";
+    }
+    //checks if the coordinate is occupied by a ship
     if (gameBoard[x][y] === 1) {
-      //send hit to the corresponding ship
-
+      //changes the value of the coordinate to "x";
+      gameBoard[x][y] = "x";
+      //return the name of the ship that has been hit
       const ship = shipData.find((item) =>
         item.coordinates.find((coords) => coords[0] === x && coords[1] === y)
       );
+      //executes the hit function
       ship.hit();
-      return `${ship.name} got hit!`;
-    } else if (gameBoard[x][y] === 0) {
-      return "better luck next time!";
-      //record coordinates of missed shot
+
+      return `${ship.name} is hit!`;
+    }
+    //checks if the coordinates miss
+    else if (gameBoard[x][y] === 0) {
+      //records missed coordinate to missedShots array
+      missedShots.push([x, y]);
+      //changes the value of the coordinate to "x";
+      gameBoard[x][y] = "x";
+
+      return "Missed!";
     }
   };
 
+  const checkAllShips = () => {
+    //write a function that returns a message when all ships from the gameboard as sunk.
+
+    //returns sink status of each ship
+    let sinkStatus = shipData.map((item) => item.isSunk());
+    //checks if the sink status of all ships are true
+    const allEqual = (arr) => arr.every((val) => val === true);
+    //returns game over message if all ships are sunk
+    if (allEqual(sinkStatus)) {
+      return "Game Over! All ships are sunk!";
+    }
+  };
   return {
     placeShip,
     generateBoard,
     receiveAttack,
+    checkAllShips,
     gameBoard,
     shipData,
+    missedShots,
   };
 };
 
