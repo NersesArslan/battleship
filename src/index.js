@@ -18,17 +18,7 @@ gameboard.placeShip(cruiser, [0, 0], true);
 gameboard.placeShip(submarine, [9, 0], false);
 gameboard.placeShip(destroyer, [0, 8], true);
 
-gameboard.shipData.map((element, shipCoord) =>
-  element.coordinates.map((test) => (test === shipCoord ? "hit" : "miss"))
-);
+console.log(gameboard.shipData.forEach((item) => console.log(item)));
 
-const result = (arr) =>
-  gameboard.shipData.map((element) =>
-    element.coordinates.map((test) => {
-      if (test[0] === arr[0] && test[1] === arr[1]) {
-        return "you've been hit!";
-      } else {
-        return "missed!";
-      }
-    })
-  );
+// console.log(gameboard.shipData.map((element) => console.log(element.name)));
+// console.log(gameboard.shipData.map((element) => console.log(element.isSunk())));

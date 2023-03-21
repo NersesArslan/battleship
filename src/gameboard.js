@@ -46,6 +46,7 @@ const bored = () => {
         // pushes each placed ships coordinates to the ship object
         ship.coordinates.push((coords[i] = [x, y + i]));
       }
+      //pushes each newly placed ship onto the shipData array
       shipData.push(ship);
     } else {
       //code for vertical placement of ships
