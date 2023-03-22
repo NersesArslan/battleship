@@ -8,39 +8,41 @@ import {
 } from "./ship.js";
 
 import bored from "./gameboard.js";
-import { template } from "lodash";
+import { first, template } from "lodash";
 
-const gameboard = bored();
+const player = () => {
+  return { ship, bored };
+};
 
-gameboard.placeShip(carrier, [4, 4], true);
-gameboard.placeShip(battleship, [9, 9], false);
-gameboard.placeShip(cruiser, [0, 0], true);
-gameboard.placeShip(submarine, [9, 0], false);
-gameboard.placeShip(destroyer, [0, 8], true);
+// initialze player 1
+const player1 = player();
 
-gameboard.receiveAttack([0, 8]);
-gameboard.receiveAttack([0, 9]);
-gameboard.receiveAttack([1, 0]);
+//creates player1's board object
+const player1Board = player1.bored();
+//creates player1's board
+player1Board.generateBoard();
 
-gameboard.receiveAttack([4, 4]);
-gameboard.receiveAttack([4, 5]);
-gameboard.receiveAttack([4, 6]);
-gameboard.receiveAttack([4, 7]);
-gameboard.receiveAttack([4, 8]);
+//places ships to player1's boards
+player1Board.placeShip(carrier, [3, 3], true);
+player1Board.placeShip(cruiser, [9, 0], false);
+player1Board.placeShip(battleship, [0, 0], true);
+player1Board.placeShip(submarine, [8, 8], false);
+player1Board.placeShip(destroyer, [9, 5], true);
+// steps for now:
+//place all ships on player1's board
+//then initialize player2 and do the same
+console.log(player1Board.gameBoard);
 
-gameboard.receiveAttack([9, 9]);
-gameboard.receiveAttack([8, 9]);
-gameboard.receiveAttack([7, 9]);
-gameboard.receiveAttack([6, 9]);
+//player2
+const player2 = player();
 
-// gameboard.receiveAttack([0, 0]);
-gameboard.receiveAttack([0, 1]);
-gameboard.receiveAttack([0, 2]);
+const player2Board = player2.bored();
+player2Board.generateBoard();
 
-gameboard.receiveAttack([9, 0]);
-gameboard.receiveAttack([8, 0]);
-gameboard.receiveAttack([7, 0]);
+player2Board.placeShip(carrier, [1, 1], true);
+player2Board.placeShip(cruiser, [2, 1], true);
+player2Board.placeShip(battleship, [3, 1], true);
+player2Board.placeShip(submarine, [4, 1], true);
+player2Board.placeShip(destroyer, [5, 1], true);
 
-console.log(gameboard.checkAllShips());
-
-// console.log(gameboard.allShipsSunk());
+console.log(player2Board.gameBoard);
