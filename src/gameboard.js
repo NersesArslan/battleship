@@ -120,6 +120,8 @@ const bored = () => {
     //returns game over message if all ships are sunk
     if (allEqual(sinkStatus)) {
       return "Game Over! All ships are sunk!";
+    } else {
+      return false;
     }
   };
   return {
