@@ -43,17 +43,24 @@ console.log(computer.attack(player1, [0, 1]));
 //I think I need to worry about that when I creat the game loop and module
 //
 
-//function that returns a random number from
-const getRandom = () => {
-  return Math.floor(Math.random() * 9);
-};
-const computerAttack = () => {
-  const getRandom = () => {
-    return Math.floor(Math.random() * 9);
-  };
+// return random coordinates from gameboard (note: recurions uses too much memory, consider
+//using a different way)
 
-  let x = getRandom();
-  let y = getRandom();
+// let hits = [];
 
-  return [x, y];
-};
+// const computerAttack = () => {
+//   const getRandom = () => {
+//     return Math.floor(Math.random() * 9);
+//   };
+
+//   let x = getRandom();
+//   let y = getRandom();
+//   if (hits.find((item) => item[0] === x && item[1] === y)) {
+//     return computerAttack();
+//   }
+
+//   hits.push([x, y]);
+//   return [x, y];
+// };
+
+// computerAttack();

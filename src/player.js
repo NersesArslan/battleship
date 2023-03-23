@@ -10,12 +10,15 @@ import {
 import bored from "./gameboard.js";
 
 // player factory
-const player = () => {
+
+//initialize each player object with enemyBoard to re
+const player = (enemyBoard) => {
   //initializes each player's board factory so all board method are be called direcly from each
   //new player obejct
   const userBoard = bored();
   const board = userBoard.generateBoard();
 
+  const enemy = enemyBoard.generateBoard();
   const placeShip = (ship, coordinate, axis) => {
     userBoard.placeShip(ship, coordinate, axis);
   };
@@ -28,7 +31,7 @@ const player = () => {
   };
 
   //method that attacks other player
-  const attack = (enemy, coord) => {
+  const attack = (coord) => {
     return enemy.receiveAttack(coord);
   };
   return { board, placeShip, receiveAttack, checkAllShips, attack };
