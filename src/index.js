@@ -8,59 +8,37 @@ import {
 } from "./ship.js";
 
 import bored from "./gameboard.js";
-import player from "./player.js";
+import { player, computer } from "./player.js";
 import { first, template } from "lodash";
 
 // set up player 1's gameboard & ships
+const playerBoard = bored();
+console.log(playerBoard.generateBoard());
 
-const player1 = player();
+playerBoard.placeShip(carrier, [3, 3], true);
+playerBoard.placeShip(cruiser, [9, 0], false);
+playerBoard.placeShip(battleship, [0, 0], true);
+playerBoard.placeShip(submarine, [8, 8], false);
+playerBoard.placeShip(destroyer, [9, 5], true);
 
-console.log(player1.board);
+//  set up computer's gameboard & ships
+const computerBoard = bored();
+console.log(computerBoard.generateBoard());
 
-player1.placeShip(carrier, [3, 3], true);
-player1.placeShip(cruiser, [9, 0], false);
-player1.placeShip(battleship, [0, 0], true);
-player1.placeShip(submarine, [8, 8], false);
-player1.placeShip(destroyer, [9, 5], true);
+computerBoard.placeShip(carrier, [1, 1], true);
+computerBoard.placeShip(cruiser, [2, 1], true);
+computerBoard.placeShip(battleship, [3, 1], true);
+computerBoard.placeShip(submarine, [4, 1], true);
+computerBoard.placeShip(destroyer, [5, 1], true);
 
-// // set up computer's gameboard & ships
-const computer = player();
+// creat player and computer objects & let them take turns attacking each other's gameboard
 
-console.log(computer.board);
+const player1 = player(computerBoard);
+const computer1 = computer(playerBoard);
 
-computer.placeShip(carrier, [1, 1], true);
-computer.placeShip(cruiser, [2, 1], true);
-computer.placeShip(battleship, [3, 1], true);
-computer.placeShip(submarine, [4, 1], true);
-computer.placeShip(destroyer, [5, 1], true);
+//player's first attack
+console.log(player1.attack([0, 0]));
+console.log(computer1.attack());
 
-console.log(computer.attack(player1, [0, 0]));
-console.log(player1.attack(computer, [0, 0]));
-
-console.log(computer.attack(player1, [0, 1]));
-//I have to write the game in a way where players (just one player) takes
-// turns with the computer in attacking the other gameboard.
-//I think I need to worry about that when I creat the game loop and module
-//
-
-// return random coordinates from gameboard (note: recurions uses too much memory, consider
-//using a different way)
-
-// let hits = [];
-
-// const computerAttack = () => {
-//   const getRandom = () => {
-//     return Math.floor(Math.random() * 9);
-//   };
-
-//   let x = getRandom();
-//   let y = getRandom();
-//   if (hits.find((item) => item[0] === x && item[1] === y)) {
-//     return computerAttack();
-//   }
-
-//   hits.push([x, y]);
-//   return [x, y];
-// };
-
-// computerAttack();
+console.log(player1.attack([2, 2]));
+console.log(computer1.attack());

@@ -11,30 +11,39 @@ import bored from "./gameboard.js";
 
 // player factory
 
-//initialize each player object with enemyBoard to re
 const player = (enemyBoard) => {
-  //initializes each player's board factory so all board method are be called direcly from each
-  //new player obejct
-  const userBoard = bored();
-  const board = userBoard.generateBoard();
-
-  const enemy = enemyBoard.generateBoard();
-  const placeShip = (ship, coordinate, axis) => {
-    userBoard.placeShip(ship, coordinate, axis);
+  //attack method for player type
+  const attack = (hit) => {
+    return enemyBoard.receiveAttack(hit);
   };
 
-  const receiveAttack = (hit) => {
-    return userBoard.receiveAttack(hit);
+  return {
+    attack,
   };
-  const checkAllShips = () => {
-    return userBoard.checkAllShips();
-  };
-
-  //method that attacks other player
-  const attack = (coord) => {
-    return enemy.receiveAttack(coord);
-  };
-  return { board, placeShip, receiveAttack, checkAllShips, attack };
 };
 
-export default player;
+const computer = (enemyBoard) => {
+  const attack = () => {
+    let hits = [];
+    const getRandom = () => {
+      return Math.floor(Math.random() * 9);
+    };
+
+    const computerAttack = () => {
+      let x = getRandom();
+      let y = getRandom();
+      if (hits.find((item) => item[0] === x && item[1] === y)) {
+        return computerAttack();
+      }
+
+      hits.push([x, y]);
+      return [x, y];
+    };
+
+    return enemyBoard.receiveAttack(computerAttack());
+  };
+
+  return { attack };
+};
+
+export { player, computer };
