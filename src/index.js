@@ -10,7 +10,7 @@ import {
 import bored from "./gameboard.js";
 import { player, computer } from "./player.js";
 import { first, template } from "lodash";
-
+import "./style.css";
 // set up player 1's gameboard & ships
 const playerBoard = bored();
 console.log(playerBoard.generateBoard());
