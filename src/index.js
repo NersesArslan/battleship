@@ -11,34 +11,55 @@ import bored from "./gameboard.js";
 import { player, computer } from "./player.js";
 import { first, template } from "lodash";
 import "./style.css";
-// set up player 1's gameboard & ships
-const playerBoard = bored();
-console.log(playerBoard.generateBoard());
 
-playerBoard.placeShip(carrier, [3, 3], true);
-playerBoard.placeShip(cruiser, [9, 0], false);
-playerBoard.placeShip(battleship, [0, 0], true);
-playerBoard.placeShip(submarine, [8, 8], false);
-playerBoard.placeShip(destroyer, [9, 5], true);
+// game loops should set up a new game by creating players and gameboards.
+const gameLoop = () => {
+  const playerBoard = bored();
+  const computerBoard = bored();
+  //create gameboard
+  playerBoard.generateBoard();
+  computerBoard.generateBoard();
+  //create players
+  const player1 = player(computerBoard);
+  const computer1 = computer(playerBoard);
 
-//  set up computer's gameboard & ships
-const computerBoard = bored();
-console.log(computerBoard.generateBoard());
+  //manually set each gameboard with pre-determiend coordinates
+  playerBoard.placeShip(carrier, [3, 3], true);
+  playerBoard.placeShip(cruiser, [9, 0], false);
+  playerBoard.placeShip(battleship, [0, 0], true);
+  playerBoard.placeShip(submarine, [8, 8], false);
+  playerBoard.placeShip(destroyer, [9, 5], true);
 
-computerBoard.placeShip(carrier, [1, 1], true);
-computerBoard.placeShip(cruiser, [2, 1], true);
-computerBoard.placeShip(battleship, [3, 1], true);
-computerBoard.placeShip(submarine, [4, 1], true);
-computerBoard.placeShip(destroyer, [5, 1], true);
+  computerBoard.placeShip(carrier, [1, 1], true);
+  computerBoard.placeShip(cruiser, [2, 1], true);
+  computerBoard.placeShip(battleship, [3, 1], true);
+  computerBoard.placeShip(submarine, [4, 1], true);
+  computerBoard.placeShip(destroyer, [5, 1], true);
 
-// creat player and computer objects & let them take turns attacking each other's gameboard
+  return { playerBoard, computerBoard, player1, computer1 };
+};
 
-const player1 = player(computerBoard);
-const computer1 = computer(playerBoard);
+const game = gameLoop();
+console.log(game.playerBoard.gameBoard);
+console.log(game.computerBoard.gameBoard);
+console.log(game.player1.attack([1, 1]));
+console.log(game.computer1.attack());
 
-//player's first attack
-console.log(player1.attack([0, 0]));
-console.log(computer1.attack());
+const board = document.querySelector(".board");
 
-console.log(player1.attack([2, 2]));
-console.log(computer1.attack());
+const renderBoard = (gameBoard) => {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const cell = document.createElement("div");
+
+      cell.classList.add("cell");
+      if (gameBoard[i][j] === 1) {
+        cell.style.backgroundColor = "gray";
+      } else if (gameBoard[i][j] === "x") {
+        cell.style.backgroundColor = "red";
+      }
+      board.appendChild(cell);
+    }
+  }
+};
+console.log(renderBoard(game.playerBoard.gameBoard));
