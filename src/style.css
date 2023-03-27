@@ -7,13 +7,23 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100%;
   border: 1px solid black;
+  gap: 300px;
 }
 
-.board {
+.player-board {
+  height: 400px;
+  width: 400px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  border: 1px solid red;
+}
+
+.computer-board {
   height: 400px;
   width: 400px;
   display: grid;
@@ -24,4 +34,8 @@ body {
 
 .cell {
   border: 1px solid black;
+}
+
+h3 {
+  text-align: center;
 }
