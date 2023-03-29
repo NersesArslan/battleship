@@ -11,10 +11,4 @@ const ship = (name, length) => {
   return { name, length, coordinates, hit, isSunk, hits };
 };
 
-const carrier = ship("carrier", 5);
-const battleship = ship("battleship", 4);
-const cruiser = ship("cruiser", 3);
-const submarine = ship("submarine", 3);
-const destroyer = ship("destroyer", 2);
-
-export { ship, carrier, cruiser, battleship, submarine, destroyer };
+export { ship };

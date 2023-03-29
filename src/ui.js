@@ -3,6 +3,7 @@ const UI = () => {
   const computerBoard = document.querySelector(".computer-board");
 
   const renderPlayerBoard = (gameBoard) => {
+    playerBoard.innerHTML = "";
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         const cell = document.createElement("div");
@@ -19,6 +20,7 @@ const UI = () => {
   };
 
   const renderComputerBoard = (gameBoard) => {
+    computerBoard.innerHTML = "";
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         const cell = document.createElement("div");
@@ -28,10 +30,10 @@ const UI = () => {
         } else if (gameBoard[i][j] === "x") {
           cell.style.backgroundColor = "#f87171";
         }
-
         computerBoard.appendChild(cell);
       }
     }
+    return gameBoard;
   };
 
   const renderPlayerAttack = (gameBoard) => {
@@ -42,7 +44,7 @@ const UI = () => {
         cell.classList.add("cell");
         cell.addEventListener("click", (e) => {
           gameBoard[i][j] = "x";
-          cell.style.backgroundColor = "red";
+          cell.style.backgroundColor = "#f87171";
         });
         if (gameBoard[i][j] === 1) {
           cell.style.backgroundColor = "gray";
@@ -52,6 +54,7 @@ const UI = () => {
         computerBoard.appendChild(cell);
       }
     }
+
     return gameBoard;
   };
   return { renderPlayerBoard, renderComputerBoard, renderPlayerAttack };

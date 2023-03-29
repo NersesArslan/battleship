@@ -96,8 +96,6 @@ const bored = () => {
       );
       //executes the hit function
       ship.hit();
-
-      return `${ship.name} is hit!`;
     }
     //checks if the coordinates miss
     else if (gameBoard[x][y] === 0) {
@@ -108,6 +106,7 @@ const bored = () => {
 
       return "Missed!";
     }
+    return gameBoard;
   };
 
   const checkAllShips = () => {
@@ -119,7 +118,7 @@ const bored = () => {
     const allEqual = (arr) => arr.every((val) => val === true);
     //returns game over message if all ships are sunk
     if (allEqual(sinkStatus)) {
-      return "Game Over! All ships are sunk!";
+      return true;
     } else {
       return false;
     }
