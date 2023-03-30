@@ -3,10 +3,9 @@ import { ship } from "./ship";
 const bored = () => {
   // array where all ship data (name, coordinates, sinkStatus) is stored
   let shipData = [];
-  // array where all missed shots are stored.
-  //"You miss 100% of the shots you don't take"
-  // --Wayne Gretzky
+
   let missedShots = [];
+
   // generates 10 x 10 gameboard as a 2D array
   let board = [];
 

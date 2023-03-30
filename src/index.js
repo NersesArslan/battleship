@@ -13,10 +13,12 @@ const computerBoard = bored();
 //create gameboard
 playerBoard.generateBoard();
 computerBoard.generateBoard();
-//create players
+
+//create players for attack methods
 const player1 = player(computerBoard);
 const computer1 = computer(playerBoard);
 
+//create UI for render methods
 const renderGame = UI();
 
 //manually set each gameboard with pre-determiend coordinates
@@ -43,27 +45,14 @@ const attack = (arr) => {
   computer1.attack();
 };
 
-attack([3, 3]);
-
-attack([3, 4]);
-
-attack([3, 1]);
-
-attack([3, 2]);
-
-attack([9, 9]);
-
-attack([8, 9]);
-attack([9, 0]);
-attack([8, 0]);
-attack([7, 0]);
-attack([6, 0]);
-attack([5, 0]);
-attack([5, 3]);
-attack([5, 4]);
-attack([5, 5]);
-attack([1, 5]);
-attack([1, 6]);
-attack([1, 7]);
-
 render();
+const checkforClick = () => {
+  const allCells = document.querySelectorAll(".computer-cell");
+  allCells.forEach((item) =>
+    item.addEventListener("click", () => {
+      return alert("you clicked a cell!");
+    })
+  );
+};
+
+checkforClick();
