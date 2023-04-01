@@ -1,8 +1,9 @@
 const UI = () => {
   const playerBoard = document.querySelector(".player-board");
   const computerBoard = document.querySelector(".computer-board");
+
   const renderPlayerBoard = (gameBoard) => {
-    playerBoard.innerHTML = "";
+    playerBoard.textContent = "";
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         const cell = document.createElement("div");
@@ -16,10 +17,11 @@ const UI = () => {
         playerBoard.appendChild(cell);
       }
     }
+    return gameBoard;
   };
 
   const renderComputerBoard = (gameBoard) => {
-    computerBoard.innerHTML = "";
+    computerBoard.textContent = "";
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         const cell = document.createElement("div");
@@ -37,10 +39,8 @@ const UI = () => {
     }
     return gameBoard;
   };
-  const getClickedCell = () => {
-    const cells = document.querySelectorAll(".cell");
-  };
-  return { renderPlayerBoard, renderComputerBoard, getClickedCell };
+
+  return { renderPlayerBoard, renderComputerBoard };
 };
 
 export default UI;

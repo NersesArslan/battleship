@@ -39,23 +39,26 @@ const render = () => {
   renderGame.renderPlayerBoard(playerBoard.gameBoard);
   renderGame.renderComputerBoard(computerBoard.gameBoard);
 };
-
 render();
-
-const cells = document.querySelectorAll(".cell");
-
-cells.forEach((item) =>
-  item.addEventListener("click", (e) => {
-    player1.attack([
-      parseInt(e.target.dataset.x),
-      parseInt(e.target.dataset.y),
-    ]);
-    computer1.attack();
-    render();
-  })
-);
-
-const game = () => {
-  if (!computerBoard.checkAllShips) {
-  }
+const renderWithClick = () => {
+  render();
+  renderUserClick();
 };
+const renderUserClick = () => {
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((item) =>
+    item.addEventListener("click", (e) => {
+      player1.attack([parseInt(item.dataset.x), parseInt(item.dataset.y)]);
+      computer1.attack();
+      // console.log(computerBoard.gameBoard);
+      renderWithClick();
+      if (computerBoard.checkAllShips()) {
+        alert("Game Over. You win!");
+      } else if (playerBoard.checkAllShips()) {
+        alert("Game Over. Computer wins!");
+      }
+    })
+  );
+};
+
+renderUserClick();
