@@ -40,19 +40,22 @@ const render = () => {
   renderGame.renderComputerBoard(computerBoard.gameBoard);
 };
 
-const attack = (arr) => {
-  player1.attack(arr);
-  computer1.attack();
-};
-
 render();
-const checkforClick = () => {
-  const allCells = document.querySelectorAll(".computer-cell");
-  allCells.forEach((item) =>
-    item.addEventListener("click", () => {
-      return alert("you clicked a cell!");
-    })
-  );
-};
 
-checkforClick();
+const cells = document.querySelectorAll(".cell");
+
+cells.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    player1.attack([
+      parseInt(e.target.dataset.x),
+      parseInt(e.target.dataset.y),
+    ]);
+    computer1.attack();
+    render();
+  })
+);
+
+const game = () => {
+  if (!computerBoard.checkAllShips) {
+  }
+};
